@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
+const API_URL = 'https://anu-whatsapp-backend.onrender.com';
+
 function App() {
   const [conversations, setConversations] = useState({});
   const [activeChatId, setActiveChatId] = useState(null);
@@ -11,7 +13,7 @@ function App() {
   // Function to fetch conversations
   const fetchConversations = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/conversations');
+      const response = await axios.get(`${API_URL}/api/conversations`);
       setConversations(response.data);
     } catch (error) {
       console.error('Error fetching conversations:', error);
@@ -45,7 +47,7 @@ function App() {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/send', messageData);
+      const response = await axios.post(`${API_URL}/api/send`, messageData);
       if (response.status === 201) {
         setNewMessage('');
         fetchConversations(); // Re-fetch conversations to show the new message
