@@ -2,6 +2,9 @@
 
 A full-stack web application that simulates the WhatsApp Web interface. This project displays chat conversations from sample webhook data, groups them by user, and allows for sending new messages. It was built as part of a full-stack developer evaluation.
 
+## Live Demo
+
+**[View the live application here](https://anu-whatsapp-frontend.onrender.com/)** 🚀
 
 
 ## Key Features
