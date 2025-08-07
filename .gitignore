@@ -1,0 +1,12 @@
+# Dependencies for both frontend and backend
+# This ensures the large node_modules folders are not uploaded
+/frontend/node_modules
+/backend/node_modules
+
+# Backend environment file
+# This keeps your secret database key out of GitHub
+/backend/.env
+
+# React production build folder
+# This is a temporary folder created when you build your frontend
+/frontend/build

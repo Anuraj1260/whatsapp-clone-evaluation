@@ -1,0 +1,82 @@
+### Test 1: Send a simple message from the UI
+# This simulates sending a message from the app's input box.
+POST http://localhost:5000/api/send
+Content-Type: application/json
+
+{
+  "wa_id": "111222333",
+  "name": "John Doe",
+  "text": "Hello from the test file!"
+}
+
+### Test 2: Process a sample webhook for a NEW MESSAGE
+# This uses the exact payload from the sample files to create a new conversation.
+POST http://localhost:5000/api/webhook
+Content-Type: application/json
+
+{
+  "payload_type": "whatsapp_webhook",
+  "_id": "conv1-msg1-user",
+  "metaData": {
+    "entry": [
+      {
+        "changes": [
+          {
+            "field": "messages",
+            "value": {
+              "contacts": [
+                {
+                  "profile": {
+                    "name": "Ravi Kumar"
+                  },
+                  "wa_id": "919937320320"
+                }
+              ],
+              "messages": [
+                {
+                  "from": "919937320320",
+                  "id": "wamid.HBgMOTE5OTY3NTc4NzIwFQIAEhggMTIzQURFRjEyMzQ1Njc4OTA=",
+                  "timestamp": "1754400000",
+                  "text": {
+                    "body": "Hi, I’d like to know more about your services."
+                  },
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+### Test 3: Process a sample webhook for a STATUS UPDATE
+# This uses a status payload to update the message from Test 2 to "read".
+POST http://localhost:5000/api/webhook
+Content-Type: application/json
+
+{
+    "payload_type": "whatsapp_webhook",
+    "_id": "conv1-msg1-status-read",
+    "metaData": {
+        "entry": [
+            {
+                "changes": [
+                    {
+                        "field": "messages",
+                        "value": {
+                            "statuses": [
+                                {
+                                    "id": "wamid.HBgMOTE5OTY3NTc4NzIwFQIAEhggMTIzQURFRjEyMzQ1Njc4OTA=",
+                                    "status": "read",
+                                    "timestamp": "1754400005"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
