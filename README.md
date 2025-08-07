@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# WhatsApp Web Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web application that simulates the WhatsApp Web interface. This project displays chat conversations from sample webhook data, groups them by user, and allows for sending new messages. It was built as part of a full-stack developer evaluation.
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Key Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* **WhatsApp-like UI**: A clean, responsive interface inspired by WhatsApp Web.
+* **Conversation Grouping**: Displays all chats neatly organized and grouped by user.
+* **Detailed Chat View**: Shows message bubbles with timestamps and delivery status indicators (`sent`, `delivered`, `read`).
+* **Webhook Processor**: A backend endpoint capable of processing simulated webhook payloads for both new messages and status updates.
+* **Send Messages**: A "Send Message" feature to add new messages to a conversation and persist them in the database.
+* **Responsive Design**: The layout is mobile-friendly and adapts to various screen sizes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+* **Frontend**: React, Axios
+* **Backend**: Node.js, Express.js
+* **Database**: MongoDB (with Mongoose)
+* **Deployment**: Render
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+To get a local copy up and running, follow these simple steps.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Node.js and npm
+* Git
+* A free MongoDB Atlas account for the database
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation & Setup
 
-### `npm run eject`
+1.  **Clone the repository:**
+    ```sh
+    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    cd whatsapp-clone
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2.  **Setup the Backend:**
+    ```sh
+    cd backend
+    npm install
+    ```
+    Create a `.env` file in the `backend` folder and add your MongoDB connection string:
+    ```
+    MONGO_URI=your_mongodb_connection_string
+    ```
+    Start the backend server:
+    ```sh
+    npm start
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3.  **Setup the Frontend:**
+    Open a new terminal window.
+    ```sh
+    cd frontend
+    npm install
+    ```
+    Start the frontend development server:
+    ```sh
+    npm start
+    ```
+    The application will be available at `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## API Endpoints
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The backend provides the following API endpoints:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* `GET /api/conversations`: Fetches all conversations, grouped by user.
+* `POST /api/send`: Sends a new message from the UI and saves it to the database.
+* `POST /api/webhook`: Processes incoming webhook payloads to create new messages or update message statuses.
