@@ -6,7 +6,6 @@ A full-stack web application that simulates the WhatsApp Web interface. This pro
 
 **[View the live application here](https://anu-whatsapp-frontend.onrender.com/)** 🚀
 
-
 ## Key Features
 
 * **WhatsApp-like UI**: A clean, responsive interface inspired by WhatsApp Web.
@@ -37,8 +36,8 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repository:**
     ```sh
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-    cd whatsapp-clone
+    git clone [https://github.com/Anuraj1260/whatsapp-clone-evaluation.git](https://github.com/Anuraj1260/whatsapp-clone-evaluation.git)
+    cd whatsapp-clone-evaluation
     ```
 
 2.  **Setup the Backend:**
@@ -74,3 +73,49 @@ The backend provides the following API endpoints:
 * `GET /api/conversations`: Fetches all conversations, grouped by user.
 * `POST /api/send`: Sends a new message from the UI and saves it to the database.
 * `POST /api/webhook`: Processes incoming webhook payloads to create new messages or update message statuses.
+
+---
+
+## How to Test the Status Update Feature
+
+The application's backend can process webhook payloads to update a message's status from `delivered` to `read`. To test this, you can send a `POST` request to the live webhook endpoint.
+
+1.  **Create a Message**: First, use the UI to send a message to any chat, or use the sample payload for "Ravi Kumar" to create the initial message.
+
+2.  **Get the Message ID**: For this demo, you can use the ID of the first message sent by "Ravi Kumar" from the sample files:
+    `wamid.HBgMOTE5OTY3NTc4NzIwFQIAEhggMTIzQURFRjEyMzQ1Njc4OTA=`
+
+3.  **Send the Status Update Payload**: Use an API tool like Postman or a `curl` command to send the following JSON payload to the live backend URL.
+
+    **URL**: `https://anu-whatsapp-backend.onrender.com/api/webhook`
+
+    **Method**: `POST`
+
+    **Body**:
+    ```json
+    {
+        "payload_type": "whatsapp_webhook",
+        "metaData": {
+            "entry": [
+                {
+                    "changes": [
+                        {
+                            "field": "messages",
+                            "value": {
+                                "statuses": [
+                                    {
+                                        "id": "wamid.HBgMOTE5OTY3NTc4NzIwFQIAEhggMTIzQURFRjEyMzQ1Njc4OTA=",
+                                        "status": "read",
+                                        "timestamp": "1754400005"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    ```
+
+4.  **Observe the Change**: After sending the request, the status indicator for that message in the UI will update to "read".
